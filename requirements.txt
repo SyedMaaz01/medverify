@@ -37,7 +37,7 @@ opentelemetry-instrumentation-sqlalchemy==0.43b0
 opentelemetry-exporter-otlp==1.22.0
 
 # Email
-aiosmtplib==3.0.1
+aiosmtplib==5.1.2
 email-validator==2.2.0
 
 # SQLite async support (for dev/testing)
