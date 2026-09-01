@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.47.0
+    container_name: medverify-prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=15d'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - "127.0.0.1:9090:9090"
+    restart: unless-stopped
+    networks:
+      - medverify-backend
+    profiles:
+      - monitoring
+
+  alertmanager:
+    image: prom/alertmanager:v0.26.0
+    container_name: medverify-alertmanager
+    ports:
+      - "127.0.0.1:9093:9093"
+    restart: unless-stopped
+    networks:
+      - medverify-backend
+    profiles:
+      - monitoring
+
+volumes:
+  prometheus_data:
+    driver: local
+
+networks:
+  medverify-backend:
+    external: true

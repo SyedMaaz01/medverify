@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+
+scrape_configs:
+  - job_name: 'medverify-backend'
+    static_configs:
+      - targets: ['backend:8000']
+    metrics_path: '/metrics'
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+remote_write:
+  - url: https://api.metrics.example/v1/push
+    basic_auth:
+      username: '${PROMETHEUS_USERNAME}'
+      password: '${PROMETHEUS_PASSWORD}'

@@ -1,0 +1,19 @@
+# Code Owners
+# This file defines the default reviewers for all PRs
+
+# Default owners for everything
+* @your-org/medverify-maintainers
+
+# Backend
+/api/ @your-org/medverify-maintainers
+/core/ @your-org/medverify-maintainers
+*.py @your-org/medverify-maintainers
+
+# Frontend
+/frontend/src/ @your-org/medverify-maintainers
+/frontend/*.json @your-org/medverify-maintainers
+
+# DevOps
+/docker-compose*.yml @your-org/medverify-devops
+/.github/workflows/ @your-org/medverify-devops
+/k8s/ @your-org/medverify-devops
